@@ -111,7 +111,7 @@ public class NetSample implements HttpClient{
         URL deleteUrl = new URL(url);
         HttpURLConnection deleteConnection = (HttpURLConnection) deleteUrl.openConnection();
 
-        deleteConnection.setRequestMethod("PUT");
+        deleteConnection.setRequestMethod("DELETE");
         deleteConnection.setRequestProperty("Content-Type", "application/json");
         deleteConnection.setRequestProperty("Accept", "application/json");
         deleteConnection.setRequestProperty("Authorization", "Bearer 86961842d5f233bff4c46eab333ec9bd43706e95c9758b642a0ef403e2315aa6");
