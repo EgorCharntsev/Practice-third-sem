@@ -1,4 +1,4 @@
-package ru.kpfu.itis.charntsev.net;
+package ru.kpfu.itis.charntsev.net.client;
 
 import java.io.IOException;
 import java.util.Map;

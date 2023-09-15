@@ -1,4 +1,4 @@
-package ru.kpfu.itis.charntsev.net;
+package ru.kpfu.itis.charntsev.net.client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
