@@ -9,7 +9,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class NetSample implements HttpClient{
+public class HttpClientImplementation implements HttpClient{
 
     private String readContent(HttpURLConnection connection) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -19,6 +19,8 @@ public class NetSample implements HttpClient{
                 content.append(input);
             }
             return content.toString();
+        } catch (IOException e) {
+            return "{\"cod\": " + connection.getResponseCode() + "}";
         }
     }
 
