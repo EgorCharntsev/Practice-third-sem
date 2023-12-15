@@ -1,4 +1,4 @@
-package ru.kpfu.itis.charntsev.controlwork.bot.view;
+package ru.kpfu.itis.charntsev.samwork.snake.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,11 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import ru.kpfu.itis.charntsev.controlwork.bot.client.BotClient;
-import ru.kpfu.itis.charntsev.controlwork.bot.model.User;
+import ru.kpfu.itis.charntsev.samwork.snake.model.UserConfig;
+import ru.kpfu.itis.charntsev.samwork.snake.client.GameClient;
 
-public class StartView extends BaseView {
-
+public class StartView extends BaseView{
     private AnchorPane pane;
     private VBox box;
     private TextField host;
@@ -20,18 +19,21 @@ public class StartView extends BaseView {
     private TextField username;
     private Button start;
 
-    private BotClient botClient;
+    private GameClient gameClient;
 
     private final EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
             if (event.getSource() == start) {
-                User user = new User();
-                user.setUsername(username.getText());
+                UserConfig userConfig = new UserConfig();
+                userConfig.setUsername(username.getText());
+                userConfig.setPort(Integer.parseInt(port.getText()));
+                userConfig.setHost(host.getText());
 
-                getBotApplication().setUser(user);
+                getGameApplication().setUserConfig(userConfig);
 
-                getBotApplication().getBotClient().executeCommand("/start");
+                getGameApplication().startGame();
+                getGameApplication().setView(getGameApplication().getGameView());
 
             }
         }
@@ -46,6 +48,7 @@ public class StartView extends BaseView {
     }
 
     private void createView() {
+
         pane = new AnchorPane();
 
         box = new VBox(20);
@@ -53,12 +56,19 @@ public class StartView extends BaseView {
         Label usernameLabel = new Label("username");
         username = new TextField();
 
-        start = new Button("Start bot!");
+        Label hostLabel = new Label("host");
+        host = new TextField();
+        host.setText("127.0.0.1");
+
+        Label portLabel = new Label("port");
+        port = new TextField();
+        port.setText("5555");
+
+        start = new Button("Start play!");
         start.setOnAction(eventHandler);
 
-        box.getChildren().addAll(usernameLabel, username, start);
+        box.getChildren().addAll(usernameLabel, username, hostLabel, host, portLabel, port, start);
         pane.getChildren().addAll(box);
-
 
     }
 }

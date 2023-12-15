@@ -80,12 +80,10 @@ public class BotClient {
                 String name = "Kazan";
                 WeatherUtil weatherUtil = new WeatherUtil(name);
                 try {
-                    weatherUtil.getWeather(name);
+                    message = weatherUtil.getWeather(name);
                 } catch (IOException e) {
                     throw new RuntimeException();
                 }
-
-                message = "";
                 //get weather;
 
                 break;
